@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "color-hex-case": "lower",
+    "at-rule-empty-line-before": "always",
+    "color-hex-length": "long",
+    "color-named": "never",
+    "string-quotes": "single",
+    "block-no-empty": true,
+    "indentation": 2,
+    "length-zero-no-unit": true
+  }
+}
