@@ -19,10 +19,13 @@
     "curly": true,
     "max-line-length": [true, 120],
     "quotemark": [true, "single", "jsx-double"],
+    "no-bitwise": true,
+    "no-irregular-whitespace": true,
 
     "jsx-equals-spacing": "always",
     "jsx-key": true,
     "jsx-self-close": true,
-    "jsx-curly-spacing": "never"
+    "jsx-curly-spacing": "never",
+    "jsx-space-before-trailing-slash": true
   }
 }
