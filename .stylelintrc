@@ -7,6 +7,8 @@
     "string-quotes": "single",
     "block-no-empty": true,
     "indentation": 2,
-    "length-zero-no-unit": true
+    "length-zero-no-unit": true,
+    "no-empty-first-line": true,
+    "no-eol-whitespace": true,
   }
 }
