@@ -1,6 +1,7 @@
 {
   "rulesDirectory": [
-    "tslint-react/rules"
+    "tslint-react/rules",
+    "node_modules/tslint-eslint-rules/dist/rules"
   ],
 
   "rules": {
@@ -24,11 +25,19 @@
     "import-spacing": true,
     "number-literal-format": true,
     "typedef-whitespace": true,
+    "no-duplicate-imports": true,
+    "prefer-readonly": true,
+    "no-unnecessary-callback-wrapper": true,
+    "one-line": true,
+    "align": true,
+    "new-parens": true,
+    "no-conditional-assignment": true,
 
     "jsx-equals-spacing": "always",
     "jsx-key": true,
     "jsx-self-close": true,
     "jsx-curly-spacing": "never",
-    "jsx-space-before-trailing-slash": true
+    "jsx-space-before-trailing-slash": true,
+    "jsx-no-string-ref": true
   }
 }

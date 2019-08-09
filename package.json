@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Common build tools for Ququmber projects",
   "devDependencies": {
+    "stylelint-order": "^2.0.0",
     "tslint": "^5.10.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^2.9.2",
-    "stylelint-order": "^2.0.0"
+    "typescript": "^2.9.2"
   },
   "repository": {
     "type": "git",

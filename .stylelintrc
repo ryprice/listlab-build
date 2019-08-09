@@ -10,5 +10,6 @@
     "length-zero-no-unit": true,
     "no-empty-first-line": true,
     "no-eol-whitespace": true,
+    "property-case": "lower",
   }
 }
