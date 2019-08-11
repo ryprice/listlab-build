@@ -1,7 +1,6 @@
 {
   "rulesDirectory": [
-    "tslint-react/rules",
-    "node_modules/tslint-eslint-rules/dist/rules"
+    "tslint-react/rules"
   ],
 
   "rules": {
