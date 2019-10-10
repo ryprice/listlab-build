@@ -3,4 +3,5 @@ Common build tools for public Ququmber projects. This package must be locally in
 
 ## Linting
 - tslint.json - TypeScript linting base configuration
+- tslint-ui.json - TypeScript linting additional UI configuration
 - .stylelintrc - SASS linting base configuration
