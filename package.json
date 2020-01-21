@@ -1,5 +1,5 @@
 {
-  "name": "ququmber-build",
+  "name": "listlab-build",
   "version": "1.0.0",
   "description": "Common build tools for Ququmber projects",
   "devDependencies": {
