@@ -1,5 +1,5 @@
 # ququmber-build
-Common build tools for public Ququmber projects. This package must be locally installed to build any other Ququmber packages.
+Common build tools for public ListLab projects. This package must be locally installed to build any other ListLab packages.
 
 ## Linting
 - tslint.json - TypeScript linting base configuration
