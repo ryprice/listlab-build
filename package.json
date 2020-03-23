@@ -1,7 +1,7 @@
 {
   "name": "listlab-build",
   "version": "1.0.0",
-  "description": "Common build tools for Ququmber projects",
+  "description": "Common build tools for ListLab projects",
   "devDependencies": {
     "stylelint-order": "^2.0.0",
     "tslint": "^5.10.0",
@@ -10,9 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryprice/ququmber-build.git"
+    "url": "git+https://github.com/ryprice/listlab-build.git"
   },
-  "license": "UNLICENSED",
-  "homepage": "https://github.com/ryprice/ququmber-build#readme",
   "dependencies": {}
 }
