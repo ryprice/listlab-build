@@ -1,0 +1,56 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "class-name": 0,
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "no-trailing-spaces": ["error"],
+    "semi": "off",
+    "eqeqeq": ["error", "always", {"null": "ignore"}],
+    "no-var": ["error"],
+    "no-param-reassign": ["error"],
+    "curly": ["error", "all"],
+    "max-len": ["error", {"code": 120}],
+    "quotes": ["error", "single"],
+    "no-bitwise": ["error"],
+    "no-irregular-whitespace": ["error"],
+    "no-duplicate-imports": ["error"],
+    "brace-style": ["error", "1tbs"],
+    "new-parens": ["error"],
+    "no-cond-assign": ["error"],
+    "object-curly-spacing": ["error", "never"],
+    "array-bracket-spacing": ["error", "never"],
+    "no-await-in-loop": ["error"],
+    "block-scoped-var": ["error"],
+    "no-octal": ["error"],
+    "no-self-assign": ["error"],
+    "no-redeclare": ["error"],
+    "yoda": ["error"],
+    "no-with": ["error"],
+
+    "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/type-annotation-spacing": ["error"],
+    "@typescript-eslint/prefer-readonly": ["error"]
+
+    // "import/order": ["error", {
+    //   "newlines-between": "always",
+    //   "groups": [
+    //     ["external", "builtin"],
+    //     ["internal"],
+    //     ["parent"],
+    //     ["index", "sibling"]
+    //   ],
+    //   "pathGroups": [
+    //     {"pattern": "listlab-api/**", "group": "parent"},
+    //     {"pattern": "ququmber-ui/**", "group": "parent"}
+    //   ]
+    // }]
+  }
+}
