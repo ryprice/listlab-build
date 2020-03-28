@@ -66,20 +66,6 @@ const tsLoaderConfig = () => {
   };
 };
 
-const sassLoaderConfig = () => {
-  return {
-    test: /\.sass$/,
-    loader: [
-      ExtractTextPlugin.loader,
-      { loader: 'css-loader' },
-      {
-        loader: 'sass-loader',
-        options: { includePaths: ['../ququmber-ui/lib'] }
-      }
-    ]
-  };
-};
-
 const externalsConfig = () => {
   return {
     'fb': { amd: 'fb' },
@@ -88,38 +74,10 @@ const externalsConfig = () => {
   };
 };
 
-const pluginsConfig = (api) => {
-  if (!api) {
-    throw new Error("No api specified in pluginsConfig");
-  }
-  return [
-    new ExtractTextPlugin('css/[name].css', {
-      allChunks: true
-    }),
-    new CopyWebpackPlugin([
-      { from: `node_modules/listlab-build/config.${api}.js`, to: 'config.js'},
-    ]),
-    new StyleLintPlugin({
-      syntax: 'sass'
-    })
-  ]
-};
-
-const outputConfig = () => {
-  return {
-    filename: '[name].js',
-    path: __dirname + '/build',
-    libraryTarget: 'amd'
-  };
-};
-
 module.exports = {
   eslintLoaderConfig,
   resolveConfig,
   tsLoaderConfig,
-  sassLoaderConfig,
   externalsConfig,
-  parseCommandLineArgs,
-  pluginsConfig,
-  outputConfig
+  parseCommandLineArgs
 }
