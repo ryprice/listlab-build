@@ -26,11 +26,21 @@ const parseCommandLineArgs = (env) => {
   return {api, target};
 };
 
+const assertPackageName = (packageName) => {
+  if (packageName == null) {
+    throw 'eslintLoaderConfig no package name';
+  }
+  if (!listlabPackages.includes(packageName)) {
+    throw 'eslintLoaderConfig package name unknown';
+  }
+};
+
 const eslintLoaderConfig = (packageName) => {
+  assertPackageName(packageName);
   return {
     test: /\.tsx?$/,
     loader: ['eslint-loader'],
-    include: [path.resolve(__dirname)],
+    include: [packagePaths[packageName]],
     exclude: [
       /bundles/,
       /node_modules/,
@@ -40,6 +50,7 @@ const eslintLoaderConfig = (packageName) => {
 };
 
 const resolveConfig = (packageName) => {
+  assertPackageName(packageName);
   return {
     extensions: ['.ts', '.tsx', '.js', '.sass'],
     alias: {

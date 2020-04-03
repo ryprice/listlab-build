@@ -1,4 +1,4 @@
-# ququmber-build
+# listlab-build
 Common build tools for public ListLab projects. This package must be locally installed to build any other ListLab packages.
 
 Standard build commands:
