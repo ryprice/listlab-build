@@ -34,23 +34,11 @@
     "no-redeclare": ["error"],
     "yoda": ["error"],
     "no-with": ["error"],
+    "constructor-super": ["error"],
+    "sort-imports": "off",
 
     "@typescript-eslint/semi": ["error"],
     "@typescript-eslint/type-annotation-spacing": ["error"],
     "@typescript-eslint/prefer-readonly": ["error"]
-
-    // "import/order": ["error", {
-    //   "newlines-between": "always",
-    //   "groups": [
-    //     ["external", "builtin"],
-    //     ["internal"],
-    //     ["parent"],
-    //     ["index", "sibling"]
-    //   ],
-    //   "pathGroups": [
-    //     {"pattern": "listlab-api/**", "group": "parent"},
-    //     {"pattern": "ququmber-ui/**", "group": "parent"}
-    //   ]
-    // }]
   }
 }
