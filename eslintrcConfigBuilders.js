@@ -4,11 +4,29 @@ const listlabPackages = [
   'ququmber-ui'
 ];
 
+const externalPackages = [
+  "axios",
+  "d3",
+  "immutable",
+  "lodash",
+  "qs", 
+  "react",
+  "react-custom-scrollbars",
+  "react-dom",
+  "react-dnd",
+  "react-dnd-html5-backend",
+  "react-linkify",
+  "react-live",
+  "react-masonry-component",
+  "react-tether",
+  "react-virtualized",
+];
+
 const sibilingPackages = (packageName) => {
   return listlabPackages.filter(p => p !== packageName);
 };
 
-const importOrderConfig = (packageName) => {
+const importOrderConfig = (packageName, additionalExternalPackages = []) => {
   return [
     "error",
     {
@@ -34,21 +52,9 @@ const importOrderConfig = (packageName) => {
           {"pattern": p, "group": "internal"}
         )),
 
-        {"pattern": "axios", "group": "external"},
-        {"pattern": "d3", "group": "external"},
-        {"pattern": "immutable", "group": "external"},
-        {"pattern": "lodash", "group": "external"},
-        {"pattern": "qs", "group": "external"},
-        {"pattern": "react", "group": "external"},
-        {"pattern": "react-custom-scrollbars", "group": "external"},
-        {"pattern": "react-dom", "group": "external"},
-        {"pattern": "react-dnd", "group": "external"},
-        {"pattern": "react-dnd-html5-backend", "group": "external"},
-        {"pattern": "react-linkify", "group": "external"},
-        {"pattern": "react-live", "group": "external"},
-        {"pattern": "react-masonry-component", "group": "external"},
-        {"pattern": "react-tether", "group": "external"},
-        {"pattern": "react-virtualized", "group": "external"},
+        ...externalPackages.concat(additionalExternalPackages).map(p => (
+          {"pattern": p, "group": "external"}
+        ))
       ]
     }
   ];
