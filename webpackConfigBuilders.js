@@ -6,12 +6,14 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const listlabPackages = [
   'listlab-api',
+  'listlab-internweb',
   'listlab-web',
   'ququmber-ui'
 ];
 
 const packagePaths = {
   'listlab-api': path.resolve(__dirname + '/../listlab-api-js'),
+  'listlab-internweb': path.resolve(__dirname + '/../listlab-internweb'),
   'listlab-web': path.resolve(__dirname + '/../listlab-web'),
   'ququmber-ui': path.resolve(__dirname + '/../ququmber-ui'),
 };
@@ -28,10 +30,10 @@ const parseCommandLineArgs = (env) => {
 
 const assertPackageName = (packageName) => {
   if (packageName == null) {
-    throw 'eslintLoaderConfig no package name';
+    throw 'eslintLoaderConfig: no package name';
   }
   if (!listlabPackages.includes(packageName)) {
-    throw 'eslintLoaderConfig package name unknown';
+    throw 'eslintLoaderConfig: package name unknown';
   }
 };
 
