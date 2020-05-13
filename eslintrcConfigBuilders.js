@@ -1,7 +1,8 @@
 const listlabPackages = [
   'listlab-api',
   'listlab-web',
-  'ququmber-ui'
+  'listlab-service',
+  'ququmber-ui',
 ];
 
 const externalPackages = [
