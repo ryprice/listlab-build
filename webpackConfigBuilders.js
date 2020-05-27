@@ -83,7 +83,8 @@ const externalsConfig = () => {
   return {
     'fb': { amd: 'fb' },
     'gapi': { amd: 'gapi' },
-    'amplitude': { amd: 'amplitude' }
+    'amplitude': { amd: 'amplitude' },
+    'paypal': { root: 'paypal' },
   };
 };
 
