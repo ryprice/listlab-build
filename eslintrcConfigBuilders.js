@@ -8,6 +8,8 @@ const listlabPackages = [
 const externalPackages = [
   "axios",
   "d3",
+  "express",
+  "express-http-proxy",
   "immutable",
   "lodash",
   "qs", 
@@ -21,6 +23,7 @@ const externalPackages = [
   "react-masonry-component",
   "react-tether",
   "react-virtualized",
+  "uuid",
 ];
 
 const sibilingPackages = (packageName) => {
