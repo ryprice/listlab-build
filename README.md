@@ -7,7 +7,7 @@ npm run start        # starts webpack-dev-server of app hitting prod endpoints
 npm run start-local  # starts webpack-dev-server of app hitting local endpoints
 npm run lint         # lints project
 npm run test         # runs unit tests
-npm run sample       # if available, runs webpack-dev-server of sample UI component harnesses at localhost:3001
+npm run sample       # if available, runs webpack-dev-server of sample UI component harnesses at listlab.local:3001
 
 npm run build-prod   # builds and bundles app for deployment
 npm run build-local  # builds and bundles app hitting local endpoints
