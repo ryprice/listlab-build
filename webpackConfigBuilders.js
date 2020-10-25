@@ -1,6 +1,5 @@
 const path = require('path');
 const {keyBy, mapValues, pickBy, includes} = require('lodash');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
@@ -41,7 +40,7 @@ const eslintLoaderConfig = (packageName) => {
   assertPackageName(packageName);
   return {
     test: /\.tsx?$/,
-    loader: ['eslint-loader'],
+    loader: 'eslint-loader',
     include: [packagePaths[packageName]],
     exclude: [
       /bundles/,
@@ -73,7 +72,7 @@ const tsLoaderConfig = () => {
     test: /\.tsx?$/,
     use: [
       'babel-loader',
-      'awesome-typescript-loader'
+      'ts-loader'
     ],
     exclude: [/node_modules/]
   };
@@ -81,10 +80,10 @@ const tsLoaderConfig = () => {
 
 const externalsConfig = () => {
   return {
-    'fb': { amd: 'fb' },
-    'gapi': { amd: 'gapi' },
-    'amplitude': { amd: 'amplitude' },
-    'paypal': { root: 'paypal' },
+    'fb': {amd: 'fb', commonjs2: 'fb', commonjs: 'fb' },
+    'gapi': { amd: 'gapi', commonjs2: 'gapi', commonjs: 'gapi' },
+    'amplitude': { root: 'amplitude', commonjs2: 'amplitude', commonjs: 'amplitude' },
+    'paypal': { root: 'paypal', commonjs2: 'paypal', commonjs: 'paypal' },
   };
 };
 
