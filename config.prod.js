@@ -1,4 +1,14 @@
-var withApiConfig = window.listlabConfig;
+if (window.listlabConfig) {
+  var withApiConfig = window.listlabConfig;
+} else {
+  var withApiConfig = {
+    Env: 'prod',
+    WebAddress: 'https://www.listlab.io',
+    AppAddress: 'https://app.listlab.io',
+    RootDomain: 'listlab.io'
+  };
+}
+
 withApiConfig.TaskServiceAddress = 'https://api.listlab.io/tasks';
 withApiConfig.AuthServiceAddress = 'https://api.listlab.io/sts';
 withApiConfig.UserServiceAddress = 'https://api.listlab.io/users';

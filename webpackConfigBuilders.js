@@ -5,6 +5,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const listlabPackages = [
   'listlab-api',
+  'listlab-chrome',
   'listlab-internweb',
   'listlab-web',
   'ququmber-ui'
@@ -12,6 +13,7 @@ const listlabPackages = [
 
 const packagePaths = {
   'listlab-api': path.resolve(__dirname + '/../listlab-api-js'),
+  'listlab-chrome': path.resolve(__dirname + '/../listlab-chrome'),
   'listlab-internweb': path.resolve(__dirname + '/../listlab-internweb'),
   'listlab-web': path.resolve(__dirname + '/../listlab-web'),
   'ququmber-ui': path.resolve(__dirname + '/../ququmber-ui'),

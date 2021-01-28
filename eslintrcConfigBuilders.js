@@ -1,5 +1,6 @@
 const listlabPackages = [
   'listlab-api',
+  'listlab-chrome',
   'listlab-web',
   'listlab-service',
   'ququmber-ui',
