@@ -2,6 +2,7 @@ const path = require('path');
 const {keyBy, mapValues, pickBy, includes} = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const listlabPackages = [
   'listlab-api',
@@ -38,18 +39,19 @@ const assertPackageName = (packageName) => {
   }
 };
 
-const eslintLoaderConfig = (packageName) => {
+const eslintPluginConfig = (packageName) => {
   assertPackageName(packageName);
-  return {
-    test: /\.tsx?$/,
-    loader: 'eslint-loader',
-    include: [packagePaths[packageName]],
+  const j = {
+    extensions: ['ts', 'tsx'],
+    files: [packagePaths[packageName]],
     exclude: [
-      /bundles/,
-      /node_modules/,
+      './bundles',
+      './node_modules',
       ...sibilingPackages(packageName).map(p => packagePaths[p]),
     ]
   };
+  console.log(j);
+  return new ESLintPlugin(j);
 };
 
 const resolveConfig = (packageName) => {
@@ -90,7 +92,7 @@ const externalsConfig = () => {
 };
 
 module.exports = {
-  eslintLoaderConfig,
+  eslintPluginConfig,
   resolveConfig,
   tsLoaderConfig,
   externalsConfig,
