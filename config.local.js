@@ -16,5 +16,6 @@ withApiConfig.NotificationServiceAddress = 'https://api.local.listlab.io:8080/no
 withApiConfig.CommentServiceAddress = 'https://api.local.listlab.io:8080/comments';
 withApiConfig.ListServiceAddress = 'https://api.local.listlab.io:8080/lists';
 withApiConfig.RootServiceAddress = 'https://api.local.listlab.io:8080';
+withApiConfig.TaskSyncWsServiceAddress = 'wss://api.local.listlab.io:8088/tasksync';
 
 window.listlabConfig = withApiConfig;
