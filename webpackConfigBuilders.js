@@ -71,11 +71,16 @@ const resolveConfig = (packageName) => {
   };
 };
 
-const tsLoaderConfig = () => {
+const tsLoaderConfig = (target) => {
   return {
     test: /\.tsx?$/,
     use: [
-      'babel-loader',
+      {
+        loader: 'babel-loader',
+        options: {
+          plugins: target === 'local' ? [require.resolve('react-refresh/babel')] : [],
+        },
+      },
       'ts-loader'
     ],
     exclude: [/node_modules/]
