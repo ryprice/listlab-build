@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const {keyBy, mapValues, pickBy, includes} = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -41,17 +42,16 @@ const assertPackageName = (packageName) => {
 
 const eslintPluginConfig = (packageName) => {
   assertPackageName(packageName);
-  const j = {
+  return new ESLintPlugin({
     extensions: ['ts', 'tsx'],
     files: [packagePaths[packageName]],
     exclude: [
       './bundles',
       './node_modules',
       ...sibilingPackages(packageName).map(p => packagePaths[p]),
-    ]
-  };
-  console.log(j);
-  return new ESLintPlugin(j);
+    ],
+    fix: true,
+  });
 };
 
 const resolveConfig = (packageName) => {
@@ -96,10 +96,36 @@ const externalsConfig = () => {
   };
 };
 
+const devServerConfig = (port) => ({
+  inline: true,
+  host: 'local.listlab.io',
+  https: true,
+  key: fs.readFileSync('../listlab-secrets/local.listlab.io.key'),
+  cert: fs.readFileSync('../listlab-secrets/local.listlab.io.crt'),
+  hot: true,
+  allowedHosts: [
+    '.listlab.io',
+  ],
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+  }
+});
+
+const stylelintPluginConfig = () => {
+  return new StyleLintPlugin({
+    customSyntax: 'postcss-sass',
+    files: '**/*.sass',
+  });
+}
+
 module.exports = {
   eslintPluginConfig,
   resolveConfig,
   tsLoaderConfig,
   externalsConfig,
-  parseCommandLineArgs
+  parseCommandLineArgs,
+  devServerConfig,
+  stylelintPluginConfig
 }
