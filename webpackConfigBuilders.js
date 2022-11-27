@@ -71,19 +71,21 @@ const resolveConfig = (packageName) => {
   };
 };
 
-const tsLoaderConfig = (target) => {
+const tsLoaderConfig = (target, disableHmr) => {
   return {
     test: /\.tsx?$/,
     use: [
       {
         loader: 'babel-loader',
         options: {
-          plugins: target === 'local' ? [require.resolve('react-refresh/babel')] : [],
+          plugins: (target === 'local' && !disableHmr) ? [require.resolve('react-refresh/babel')] : [],
         },
       },
       'ts-loader'
     ],
-    exclude: [/node_modules/]
+    exclude: [
+      /node_modules/,
+    ]
   };
 };
 
