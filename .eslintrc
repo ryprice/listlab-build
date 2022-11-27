@@ -37,9 +37,13 @@
     "constructor-super": ["error"],
     "sort-imports": "off",
     "eol-last": ["error", "always"],
+    "keyword-spacing": ["error"],
 
     "@typescript-eslint/semi": ["error"],
     "@typescript-eslint/type-annotation-spacing": ["error"],
-    "@typescript-eslint/prefer-readonly": ["error"]
+    "@typescript-eslint/prefer-readonly": ["error"],
+    "@typescript-eslint/array-type": ["error", {"default": "array-simple"}],
+    "@typescript-eslint/no-floating-promises": ["error"]
+    // "@typescript-eslint/strict-boolean-expressions": ["error"]
   }
 }
