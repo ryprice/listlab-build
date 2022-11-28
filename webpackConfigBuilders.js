@@ -117,8 +117,7 @@ const devServerConfig = (port) => ({
 
 const stylelintPluginConfig = () => {
   return new StyleLintPlugin({
-    customSyntax: 'postcss-sass',
-    files: '**/*.sass',
+    files: ['**/*.tsx', '**/*.ts', '**/*.sass'],
   });
 }
 
