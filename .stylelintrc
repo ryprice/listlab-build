@@ -1,5 +1,4 @@
 {
-  "customSyntax": "postcss-sass",
   "rules": {
     "color-hex-case": "lower",
     "at-rule-empty-line-before": "always",
@@ -19,11 +18,15 @@
   },
   "overrides": [
     {
+      "customSyntax": "postcss-sass",
+      "files": ["**/*.sass"]
+    },
+    {
       "customSyntax": "@stylelint/postcss-css-in-js",
       "files": ["**/*.{tsx,ts}"],
       "rules": {
-        "no-empty-first-line": false,
-        "no-eol-whitespace": false
+        "no-empty-first-line": null,
+        "no-eol-whitespace": null
       }
     }
   ]
