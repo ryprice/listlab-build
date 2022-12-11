@@ -9,13 +9,13 @@ if (window.listlabConfig) {
   };
 }
 
-withApiConfig.TaskServiceAddress = 'https://api.local.listlab.io:8080/tasks';
-withApiConfig.AuthServiceAddress = 'https://api.local.listlab.io:8080/sts';
-withApiConfig.UserServiceAddress = 'https://api.local.listlab.io:8080/users';
-withApiConfig.NotificationServiceAddress = 'https://api.local.listlab.io:8080/notifications';
-withApiConfig.CommentServiceAddress = 'https://api.local.listlab.io:8080/comments';
-withApiConfig.ListServiceAddress = 'https://api.local.listlab.io:8080/lists';
-withApiConfig.RootServiceAddress = 'https://api.local.listlab.io:8080';
-withApiConfig.TaskSyncWsServiceAddress = 'wss://api.local.listlab.io:8088/tasksync';
+withApiConfig.TaskServiceAddress = 'https://api.local.listlab.io/tasks';
+withApiConfig.AuthServiceAddress = 'https://api.local.listlab.io/sts';
+withApiConfig.UserServiceAddress = 'https://api.local.listlab.io/users';
+withApiConfig.NotificationServiceAddress = 'https://api.local.listlab.io/notifications';
+withApiConfig.CommentServiceAddress = 'https://api.local.listlab.io/comments';
+withApiConfig.ListServiceAddress = 'https://api.local.listlab.io/lists';
+withApiConfig.RootServiceAddress = 'https://api.local.listlab.io';
+withApiConfig.TaskSyncWsServiceAddress = 'wss://api.local.listlab.io/tasksync';
 
 window.listlabConfig = withApiConfig;
