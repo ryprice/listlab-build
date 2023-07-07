@@ -1,5 +1,6 @@
 const listlabPackages = [
   'listlab-api',
+  'listlab-appstate',
   'listlab-chrome',
   'listlab-web',
   'listlab-service',

@@ -7,6 +7,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 const listlabPackages = [
   'listlab-api',
+  'listlab-appstate',
   'listlab-chrome',
   'listlab-internweb',
   'listlab-web',
@@ -15,6 +16,7 @@ const listlabPackages = [
 
 const packagePaths = {
   'listlab-api': path.resolve(__dirname + '/../listlab-api-js'),
+  'listlab-appstate': path.resolve(__dirname + '/../listlab-appstate'),
   'listlab-chrome': path.resolve(__dirname + '/../listlab-chrome'),
   'listlab-internweb': path.resolve(__dirname + '/../listlab-internweb'),
   'listlab-web': path.resolve(__dirname + '/../listlab-web'),
