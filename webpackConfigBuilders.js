@@ -11,6 +11,7 @@ const listlabPackages = [
   'listlab-chrome',
   'listlab-internweb',
   'listlab-web',
+  'listlab-www',
   'ququmber-ui'
 ];
 
@@ -20,6 +21,7 @@ const packagePaths = {
   'listlab-chrome': path.resolve(__dirname + '/../listlab-chrome'),
   'listlab-internweb': path.resolve(__dirname + '/../listlab-internweb'),
   'listlab-web': path.resolve(__dirname + '/../listlab-web'),
+  'listlab-www': path.resolve(__dirname + '/../listlab-www'),
   'ququmber-ui': path.resolve(__dirname + '/../ququmber-ui'),
 };
 

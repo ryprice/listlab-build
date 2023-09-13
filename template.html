@@ -1,0 +1,64 @@
+<head>
+  <title>ListLab</title>
+  <meta charset="utf-8">
+  <link href="//%LISTLAB_DOMAIN_STATIC%/css/reset.css" type="text/css" rel="stylesheet">
+
+  <link href="//%LISTLAB_DOMAIN_STATIC%/css/tether-theme-arrows-dark.css" type="text/css" rel="stylesheet">
+  <link href="//%LISTLAB_DOMAIN_STATIC%/css/tether-theme-arrows.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="//%LISTLAB_DOMAIN_STATIC%/fonts/ququmber-icons/ququmber-icons.css?v=%LISTLAB_STATIC_VERSION%">
+  <link rel="stylesheet" href="//%LISTLAB_DOMAIN_STATIC%/fonts/fontawesome/css/all.css">
+  <link rel="stylesheet" href="//%LISTLAB_DOMAIN_STATIC%/fonts/octicons.css">
+  <link rel="stylesheet" type="text/css" href="//%LISTLAB_DOMAIN_STATIC%/css/www.css?v=%LISTLAB_STATIC_VERSION%">
+  <link rel="stylesheet" type="text/css" href="%LISTLAB_ADDRESS_APP_WEBPACK%/listlab-web-styles.css?v=%LISTLAB_STATIC_VERSION%">
+  <link rel="stylesheet" type="text/css" href="%LISTLAB_ADDRESS_APP_WEBPACK%/css/listlab-web-styles.css?v=%LISTLAB_STATIC_VERSION%">
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link rel="shortcut icon" href="//%LISTLAB_DOMAIN_STATIC%/favicon<?php echo LISTLAB_ENV == 'local' ? '-local' : '' ?>.png?v=%LISTLAB_STATIC_VERSION%">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="https://cdn.amplitude.com/libs/amplitude-4.2.1-min.gz.js"></script>
+
+  <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="774543394272-ajfk830tkiof8el00bgl166ahr8p9k1i.apps.googleusercontent.com">
+  <script type="text/javascript" src="https://apis.google.com/js/api:client.js"></script>
+
+  <script type="text/javascript">  
+    (function () {
+      var count = 0;
+      var cancelAmplitudeCheck = setInterval(function() {
+        count++;
+        if (window.amplitude != null) {
+          amplitude?.getInstance().init('2e18706ce765b66ea1b353a04d324a0d');
+          amplitude?.getInstance().setOptOut(window.listlabConfig.Env !== 'prod');
+          var amplitudeAppPath = '%AMPLITUDE_APP_PATH%';
+          amplitude.logEvent('PAGEVIEW', {path: amplitudeAppPath});
+          clearInterval(cancelAmplitudeCheck);
+        }
+        if (count > 50) {
+          console.error('amplitude not initialized after 5 seconds');
+          window.amplitude = {
+            getInstance: function() {
+              return {
+                logEvent: function() { return; }
+              };
+            }
+          };
+          clearInterval(cancelAmplitudeCheck);
+        }
+      }, 100);
+    })();
+  </script>
+
+  <script type="text/javascript">
+    window.listlabConfig = %LISTLAB_API_CONFIG_JSON%;
+    window.listlabConfig.Env = '%LISTLAB_ENV%';
+  </script>
+</head>
+<body>
+  <div id="listlabAppRoot">
+    %LISTLAB_CONTENT%
+  </div>
+</body>
+<script type="text/javascript" src="%LISTLAB_JS_PAYLOAD_LOCATION%"></script>

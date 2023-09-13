@@ -5,6 +5,7 @@ if (window.listlabConfig) {
     Env: 'prod',
     WebAddress: 'https://www.listlab.io',
     AppAddress: 'https://app.listlab.io',
+    InternAddress: 'https://intern.listlab.io',
     RootDomain: 'listlab.io'
   };
 }
