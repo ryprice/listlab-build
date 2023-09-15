@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {keyBy, mapValues, pickBy, includes} = require('lodash');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {keyBy, mapValues} = require('lodash');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
@@ -29,7 +28,7 @@ const sibilingPackages = (packageName) => {
   return listlabPackages.filter(p => p !== packageName);
 };
 
-const parseCommandLineArgs = (env) => {
+const parseWebpackCommandLineArgs = (env) => {
   const api = env && env.api === 'local' ? 'local' : 'prod';
   const target = env && env.target === 'local' ? 'local' : 'prod';
   return {api, target};
@@ -102,7 +101,7 @@ const externalsConfig = () => {
   };
 };
 
-const devServerConfig = (port) => ({
+const devServerConfig = (port, writeToDisk) => ({
   inline: true,
   host: 'local.listlab.io',
   https: true,
@@ -116,7 +115,8 @@ const devServerConfig = (port) => ({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
     "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-  }
+  },
+  writeToDisk,
 });
 
 const stylelintPluginConfig = () => {
@@ -130,7 +130,7 @@ module.exports = {
   resolveConfig,
   tsLoaderConfig,
   externalsConfig,
-  parseCommandLineArgs,
+  parseWebpackCommandLineArgs,
   devServerConfig,
   stylelintPluginConfig
 }
