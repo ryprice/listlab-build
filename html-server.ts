@@ -99,20 +99,19 @@ export const replaceEnvVariablesInTemplate = (params: {
       .split('%LISTLAB_ADDRESS_APP_WEBPACK%').join(`//static.${config.RootDomain}/js`)
       .split('%LISTLAB_ADDRESS_WWW_WEBPACK%').join(`//static.${config.RootDomain}/js`)
       .split('%LISTLAB_JS_PAYLOAD_LOCATION%')
-      .join(`//static.local.listlab.io/js/${jsPayloadName}.js?v=${staticVersion}`)
+      .join(`//static.${config.RootDomain}/js/${jsPayloadName}.js?v=${staticVersion}`)
   }
 
   return html;
 };
 
-const buildHtml = (route: ListlabBuildHtmlRoute, jsPayloadPort: number) => {
+const buildHtml = (route: ListlabBuildHtmlRoute, jsPayloadPort: number, version: string) => {
   const {jsPayloadName, ssrComponent, amplitudeAppPath} = route;
   const template: string = readFileSync('../listlab-build/template.html', 'utf8');
-  const staticVersion = '110';
   const html = replaceEnvVariablesInTemplate({
     templateStr: template,
     jsPayloadName,
-    staticVersion,
+    staticVersion: version,
     env: target,
     jsPayloadPort,
     amplitudeAppPath
@@ -131,15 +130,17 @@ export const startHtmlServer = (args: {
   routes: Array<ListlabBuildHtmlRoute>,
   port: number,
   jsPayloadPort: number,
+  version: string,
 }) => {
-  const {routes, port, jsPayloadPort} = args;
+  console.log('../package.json');
+  const {routes, port, jsPayloadPort, version} = args;
   const outputInsteadOfServer = process.argv.find(a => a === '-o');
   const app = express();
 
   if (outputInsteadOfServer) {
     for (const route of Object.values(routes)) {
       const buildPath = route.buildPath;
-      const html = buildHtml(route, jsPayloadPort);
+      const html = buildHtml(route, jsPayloadPort, version);
       const outputBaseDir = `./build/${target}/html`;
       const outputDir = `${outputBaseDir}${buildPath.substring(0, buildPath.lastIndexOf('/'))}`;
       if (!fs.existsSync(outputDir)) {
@@ -151,7 +152,7 @@ export const startHtmlServer = (args: {
     for (const route of Object.values(routes)) {
       const expressPath = route.expressPath;
       app.get(expressPath, (_: any, res: Response) => {
-        const html = buildHtml(route, jsPayloadPort);
+        const html = buildHtml(route, jsPayloadPort, version);
         res.send(html);
       });
     }
