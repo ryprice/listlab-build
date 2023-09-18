@@ -21,6 +21,7 @@ const localListlabApiConfig: Partial<ListlabApiConfig> = {
   WebAddress: 'https://www.local.listlab.io:3004',
   AppAddress: 'https://app.local.listlab.io:3006',
   InternAddress: 'https://intern.local.listlab.io:3007',
+  StaticAddress: 'https://static.local.listlab.io',
   RootDomain: 'local.listlab.io',
   TaskServiceAddress: 'https://api.local.listlab.io/tasks',
   AuthServiceAddress: 'https://api.local.listlab.io/sts',
@@ -37,6 +38,7 @@ const prodListlabApiConfig: Partial<ListlabApiConfig> = {
   WebAddress: 'https://www.listlab.io',
   AppAddress: 'https://app.listlab.io',
   InternAddress: 'https://intern.listlab.io',
+  StaticAddress: 'https://static.listlab.io',
   RootDomain: 'listlab.io',
   TaskServiceAddress: 'https://api.listlab.io/tasks',
   AuthServiceAddress: 'https://api.listlab.io/sts',
@@ -75,14 +77,14 @@ export const replaceEnvVariablesInTemplate = (params: {
   jsPayloadPort: number,
   staticVersion: string,
   env: 'local' | 'prod',
-  amplitudeAppPath: string,
+  amplitudeAppPath?: string,
 }) => {
   const {jsPayloadName, staticVersion, env, templateStr, jsPayloadPort, amplitudeAppPath} = params;
 
   let html = templateStr
     .split('%LISTLAB_ENV%').join(env)
     .split('%LISTLAB_DOMAIN_ROOT%').join(config.RootDomain)
-    .split('%LISTLAB_DOMAIN_STATIC%').join(`static.${config.RootDomain}`)
+    .split('%LISTLAB_ADDRESS_STATIC%').join(config.StaticAddress)
     .split('%LISTLAB_STATIC_VERSION%').join(staticVersion)
     .split('%AMPLITUDE_APP_PATH%').join(amplitudeAppPath || 'null')
     .split('%LISTLAB_API_CONFIG_JSON%').join(JSON.stringify(config));
@@ -132,7 +134,6 @@ export const startHtmlServer = (args: {
   jsPayloadPort: number,
   version: string,
 }) => {
-  console.log('../package.json');
   const {routes, port, jsPayloadPort, version} = args;
   const outputInsteadOfServer = process.argv.find(a => a === '-o');
   const app = express();
