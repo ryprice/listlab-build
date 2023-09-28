@@ -18,9 +18,9 @@ export type ListlabBuildHtmlRoute = {
 
 const localListlabApiConfig: Partial<ListlabApiConfig> = {
   Env: 'local',
-  WebAddress: 'https://www.local.listlab.io:3004',
-  AppAddress: 'https://app.local.listlab.io:3006',
-  InternAddress: 'https://intern.local.listlab.io:3007',
+  WebAddress: 'https://www.local.listlab.io',
+  AppAddress: 'https://app.local.listlab.io',
+  InternAddress: 'https://intern.local.listlab.io',
   StaticAddress: 'https://static.local.listlab.io',
   RootDomain: 'local.listlab.io',
   TaskServiceAddress: 'https://api.local.listlab.io/tasks',
