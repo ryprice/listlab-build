@@ -23,6 +23,9 @@ const localListlabApiConfig: Partial<ListlabApiConfig> = {
   InternAddress: 'https://intern.local.listlab.io',
   StaticAddress: 'https://static.local.listlab.io',
   RootDomain: 'local.listlab.io',
+};
+
+const localListlabApiApiConfig: Partial<ListlabApiConfig> = {
   TaskServiceAddress: 'https://api.local.listlab.io/tasks',
   AuthServiceAddress: 'https://api.local.listlab.io/sts',
   UserServiceAddress: 'https://api.local.listlab.io/users',
@@ -40,6 +43,9 @@ const prodListlabApiConfig: Partial<ListlabApiConfig> = {
   InternAddress: 'https://intern.listlab.io',
   StaticAddress: 'https://static.listlab.io',
   RootDomain: 'listlab.io',
+};
+
+const prodListlabApiApiConfig: Partial<ListlabApiConfig> = {
   TaskServiceAddress: 'https://api.listlab.io/tasks',
   AuthServiceAddress: 'https://api.listlab.io/sts',
   UserServiceAddress: 'https://api.listlab.io/users',
@@ -50,25 +56,29 @@ const prodListlabApiConfig: Partial<ListlabApiConfig> = {
   TaskSyncWsServiceAddress: 'wss://api.listlab.io/tasksync',
 };
 
-const getTarget = () => {
-  const targetArgStr = process.argv.find(a => a.startsWith('-target'));
+const getLocalProdArg = (argName: string) => {
+  const targetArgStr = process.argv.find(a => a.startsWith(`-${argName}`));
   if (targetArgStr) {
     const splitArgAndVal = targetArgStr.split('=');
     if (splitArgAndVal.length !== 2) {
-      throw new Error('Invalid target given');
+      throw new Error(`Invalid ${argName} given`);
     }
     const target = splitArgAndVal[1];
     if (target !== 'prod' && target !== 'local') {
-      throw new Error('Invalid target given. Must be prod or local.');
+      throw new Error(`Invalid ${argName} given. Must be prod or local.`);
     }
     return target;
   } else {
     return 'prod';
   }
 };
-const target = getTarget();
+const target = getLocalProdArg('target');
+const api = getLocalProdArg('api');
 
-const config = target === 'local' ? localListlabApiConfig : prodListlabApiConfig;
+const config = {
+  ...(target === 'local' ? localListlabApiConfig : prodListlabApiConfig),
+  ...(api === 'local' ? localListlabApiApiConfig : prodListlabApiApiConfig),
+};
 
 // Replace the content placeholder in the template with the rendered React component
 export const replaceEnvVariablesInTemplate = (params: {
@@ -159,8 +169,8 @@ export const startHtmlServer = (args: {
     }
 
     https.createServer({
-      key: fs.readFileSync(`../listlab-secrets/${target === 'local' ? 'local.listlab.io.key' : 'listlab.io.key'}`),
-      cert: fs.readFileSync(`../listlab-secrets/${target === 'local' ? 'local.listlab.io.crt' : 'listlab.io.crt'}`),
+      key: fs.readFileSync(`../listlab-secrets/${target === 'local' ? 'local.listlab.io.key' : 'local.listlab.io.key'}`),
+      cert: fs.readFileSync(`../listlab-secrets/${target === 'local' ? 'local.listlab.io.crt' : 'local.listlab.io.crt'}`),
     }, app).listen(port, () => {
       console.log(`HTML server started on port ${port}`);
     });
