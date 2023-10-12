@@ -3,6 +3,7 @@ import https from 'https';
 import express from 'express';
 import {Response} from 'express-serve-static-core';
 import ListlabApiConfig from 'listlab-api/ListlabApiConfig';
+import {buildListlabApiConfig} from './listlabConfigs';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 
@@ -14,46 +15,6 @@ export type ListlabBuildHtmlRoute = {
   buildPath: string,
   amplitudeAppPath?: string,
   ssrComponent?: SsrComponentType,
-};
-
-const localListlabApiConfig: Partial<ListlabApiConfig> = {
-  Env: 'local',
-  WebAddress: 'https://www.local.listlab.io',
-  AppAddress: 'https://app.local.listlab.io',
-  InternAddress: 'https://intern.local.listlab.io',
-  StaticAddress: 'https://static.local.listlab.io',
-  RootDomain: 'local.listlab.io',
-};
-
-const localListlabApiApiConfig: Partial<ListlabApiConfig> = {
-  TaskServiceAddress: 'https://api.local.listlab.io/tasks',
-  AuthServiceAddress: 'https://api.local.listlab.io/sts',
-  UserServiceAddress: 'https://api.local.listlab.io/users',
-  NotificationServiceAddress: 'https://api.local.listlab.io/notifications',
-  CommentServiceAddress: 'https://api.local.listlab.io/comments',
-  ListServiceAddress: 'https://api.local.listlab.io/lists',
-  RootServiceAddress: 'https://api.local.listlab.io',
-  TaskSyncWsServiceAddress: 'wss://api.local.listlab.io/tasksync',
-};
-
-const prodListlabApiConfig: Partial<ListlabApiConfig> = {
-  Env: 'prod',
-  WebAddress: 'https://www.listlab.io',
-  AppAddress: 'https://app.listlab.io',
-  InternAddress: 'https://intern.listlab.io',
-  StaticAddress: 'https://static.listlab.io',
-  RootDomain: 'listlab.io',
-};
-
-const prodListlabApiApiConfig: Partial<ListlabApiConfig> = {
-  TaskServiceAddress: 'https://api.listlab.io/tasks',
-  AuthServiceAddress: 'https://api.listlab.io/sts',
-  UserServiceAddress: 'https://api.listlab.io/users',
-  NotificationServiceAddress: 'https://api.listlab.io/notifications',
-  CommentServiceAddress: 'https://api.listlab.io/comments',
-  ListServiceAddress: 'https://api.listlab.io/lists',
-  RootServiceAddress: 'https://api.listlab.io',
-  TaskSyncWsServiceAddress: 'wss://api.listlab.io/tasksync',
 };
 
 const getLocalProdArg = (argName: string) => {
@@ -75,10 +36,7 @@ const getLocalProdArg = (argName: string) => {
 const target = getLocalProdArg('target');
 const api = getLocalProdArg('api');
 
-const config = {
-  ...(target === 'local' ? localListlabApiConfig : prodListlabApiConfig),
-  ...(api === 'local' ? localListlabApiApiConfig : prodListlabApiApiConfig),
-};
+const config = buildListlabApiConfig({target, api});
 
 // Replace the content placeholder in the template with the rendered React component
 export const replaceEnvVariablesInTemplate = (params: {
