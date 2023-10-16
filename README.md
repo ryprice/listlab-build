@@ -8,12 +8,13 @@ cd $LISTLAB_REPO_BASE/listlab-www
 . tools/start-docker-local.sh
 ```
 
-Standard build commands:
+Approximate standard build commands for any repo. Varies a bit by repo.
 ```bash
 npm run start-local      # convenience combine start js and html
 npm run start-local-js   # starts local js webpack server
 npm run start-local-html # starts local html page server (a simple node script)
 npm run start-prod       # like start-local, but hits prod backend
+npm run build            # builds when there is no distinction btwn prod and local, eg libraries
 npm run build-prod       # runs a prod build
 npm run lint             # lints project
 npm run test             # runs unit tests
@@ -23,6 +24,22 @@ npm run build-local  # builds and bundles app hitting local endpoints
 ```
 
 ## Setting up a new dev environment
+### Prereqs
+```bash
+sudo apt update
+sudo apt install -y git
+sudo apt install -y npm
+sudo apt install -y docker.io
+# On ubuntu, you will need to add yourself to the docker group. sudo usermod -aG docker <username>
+# MANUALLY INSTALL LATEST NODE. Instructions may differ by OS.
+# Ubuntu: https://github.com/nodesource/distributions#installation-instructions
+# If apt install nodejs fails, you may need to run:  (replace with archive path in error)
+# sudo dpkg -i --force-overwrite /var/cache/apt/archives/nodejs_20.8.0-1nodesource1_amd64.deb
+
+sudo usermod -aG docker your_username # restart after this before using docker
+```
+
+### Initial setup steps
 ```bash
 # Add env variable to .bashrc
 echo 'export LISTLAB_REPO_BASE=~/src' >> ~/.bashrc
@@ -55,21 +72,7 @@ Add these lines to `/etc/hosts`.
 # Also duplicate all lines with ::1 on OS X if ther are bonjour issues
 ```
 
-### Tool installs
-```bash
-sudo apt update
-sudo apt install -y git
-sudo apt install -y npm
-sudo apt install -y docker.io
-sudo usermod -aG docker <username> # restart before using docker
-# On ubuntu, you will need to add yourself to the docker group. sudo usermod -aG docker <username>
-# MANUALLY INSTALL LATEST NODE. Instructions may differ by OS.
-# Ubuntu: https://github.com/nodesource/distributions#installation-instructions
-# If apt install nodejs fails, you may need to run:  (replace with archive path in error)
-# sudo dpkg -i --force-overwrite /var/cache/apt/archives/nodejs_20.8.0-1nodesource1_amd64.deb
-```
-
-### Repos setup
+### Getting additional repos
 `install-repo.sh` clones and sets up a repo. Run for whichever repos you need.
 ```bash
 . $LISTLAB_REPO_BASE/listlab-build/install-repo.sh listlab-api-js
@@ -84,7 +87,8 @@ cd $LISTLAB_REPO_BASE/listlab-build
 npx ts-node link-repos.ts
 ```
 
-### Build some components that are necessary for running services
+### Initial build steps
+Some components must be built initially to successfully run the environment.
 ```bash
 # build a docker container that hosts nginx to proxy all local.listlab.io requests to the right place
 cd $LISTLAB_REPO_BASE/listlab-www
@@ -94,7 +98,7 @@ cd $LISTLAB_REPO_BASE/listlab-api-js
 npm run build
 ```
 
-## Notes for a fresh ubuntu machine
+### Notes for a fresh ubuntu machine
 ```
 su root
 sudo usermod -aG sudo vboxuser
