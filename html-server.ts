@@ -59,6 +59,7 @@ export const replaceEnvVariablesInTemplate = (params: {
 
   if (env === 'local') {
     html = html
+      .split('%LISTLAB_FAVICON_URL%').join(`//static.${config.RootDomain}/favicon-local.png?v=${staticVersion}`)
       .split('%LISTLAB_ADDRESS_APP_WEBPACK%').join(`//static.${config.RootDomain}:3000`)
       .split('%LISTLAB_ADDRESS_WWW_WEBPACK%').join(`//static.${config.RootDomain}:3005`)
       .split('%LISTLAB_JS_PAYLOAD_LOCATION%')
@@ -66,6 +67,7 @@ export const replaceEnvVariablesInTemplate = (params: {
 
   } else {
     html = html
+      .split('%LISTLAB_FAVICON_URL%').join(`//static.${config.RootDomain}/favicon.png?v=${staticVersion}`)
       .split('%LISTLAB_ADDRESS_APP_WEBPACK%').join(`//static.${config.RootDomain}/js`)
       .split('%LISTLAB_ADDRESS_WWW_WEBPACK%').join(`//static.${config.RootDomain}/js`)
       .split('%LISTLAB_JS_PAYLOAD_LOCATION%')
