@@ -15,6 +15,7 @@ export type ListlabBuildHtmlRoute = {
   buildPath: string,
   amplitudeAppPath?: string,
   ssrComponent?: SsrComponentType,
+  title?: string,
 };
 
 const getLocalProdArg = (argName: string) => {
@@ -46,8 +47,9 @@ export const replaceEnvVariablesInTemplate = (params: {
   staticVersion: string,
   env: 'local' | 'prod',
   amplitudeAppPath?: string,
+  pageTitle: string,
 }) => {
-  const {jsPayloadName, staticVersion, env, templateStr, jsPayloadPort, amplitudeAppPath} = params;
+  const {jsPayloadName, staticVersion, env, templateStr, jsPayloadPort, amplitudeAppPath, pageTitle} = params;
 
   let html = templateStr
     .split('%LISTLAB_ENV%').join(env)
@@ -55,7 +57,8 @@ export const replaceEnvVariablesInTemplate = (params: {
     .split('%LISTLAB_ADDRESS_STATIC%').join(config.StaticAddress)
     .split('%LISTLAB_STATIC_VERSION%').join(staticVersion)
     .split('%AMPLITUDE_APP_PATH%').join(amplitudeAppPath || 'null')
-    .split('%LISTLAB_API_CONFIG_JSON%').join(JSON.stringify(config));
+    .split('%LISTLAB_API_CONFIG_JSON%').join(JSON.stringify(config))
+    .split('%PAGE_TITLE%').join(pageTitle)
 
   if (env === 'local') {
     html = html
@@ -86,7 +89,8 @@ const buildHtml = (route: ListlabBuildHtmlRoute, jsPayloadPort: number, version:
     staticVersion: version,
     env: target,
     jsPayloadPort,
-    amplitudeAppPath
+    amplitudeAppPath,
+    pageTitle: route.title || 'ListLab.io'
   });
   if (ssrComponent == null) {
     return html.replace('%LISTLAB_CONTENT%', '');

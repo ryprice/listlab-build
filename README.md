@@ -36,7 +36,8 @@ sudo apt install -y docker.io
 # If apt install nodejs fails, you may need to run:  (replace with archive path in error)
 # sudo dpkg -i --force-overwrite /var/cache/apt/archives/nodejs_20.8.0-1nodesource1_amd64.deb
 
-sudo usermod -aG docker your_username # restart after this before using docker
+sudo usermod -aG docker your_username # restart after this before using docker (may not be necessary with newgrp)
+newgrp docker
 ```
 
 ### Initial setup steps
@@ -102,7 +103,8 @@ npm run build
 ```
 su root
 sudo usermod -aG sudo vboxuser
-#restart
+newgrp docker
+#restart (may not be necessary with newgrp)
 git config --global user.name "Ryan Price"
 git config --global user.email "7935599+ryprice@users.noreply.github.com"
 ```
