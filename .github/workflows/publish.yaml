@@ -1,0 +1,38 @@
+name: Publish NPM Package
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-west-2
+          aws-access-key-id: ${{secrets.AWS_CODEARTIFACT_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_CODEARTIFACT_SECRET}}
+
+      - name: Publish to CodeArtifact
+        shell: bash
+        run: |
+          mkdir -p build
+          tar -czvf build/package.tar.gz --exclude='./.git' --exclude='./node_modules' --exclude='./build' --exclude='./.github' .
+          export ASSET_SHA256=$(sha256sum build/package.tar.gz | awk '{print $1;}')
+          aws codeartifact publish-package-version \
+            --domain listlab \
+            --repository listlab \
+            --package listlab-build \
+            --package-version 1.0.${{github.run_number}} \
+            --namespace listlab \
+            --format generic \
+            --asset-content build/package.tar.gz \
+            --asset-name listlab-build-${{github.run_number}} \
+            --asset-sha256 $ASSET_SHA256

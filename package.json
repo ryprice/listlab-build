@@ -2,6 +2,9 @@
   "name": "listlab-build",
   "version": "1.0.0",
   "description": "Common build tools for ListLab projects",
+  "publishConfig": {
+    "registry": "https://listlab.d.codeartifact.region.amazonaws.com/npm/listlab"
+  },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -34,5 +37,6 @@
   },
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "scripts": {}
 }
